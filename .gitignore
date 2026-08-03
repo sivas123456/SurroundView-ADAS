@@ -1,0 +1,28 @@
+# Python caches
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environments
+venv/
+env/
+.env/
+
+# Large Datasets and Video Outputs
+*.db3
+*.mp4
+*.avi
+*.mkv
+output/
+output_demo/
+output_high_quality/
+
+# Model Weights
+*.pt
+yolov8n.pt
+
+# IDE / OS Files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

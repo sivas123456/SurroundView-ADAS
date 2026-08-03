@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADAS | Industry Pro Surround View</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0b10;
+            --glass: rgba(255, 255, 255, 0.05);
+            --accent: #00ffaa;
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            margin: 0;
+            background-color: var(--bg);
+            color: white;
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: 350px 1fr 350px;
+            height: 100vh;
+            gap: 20px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* Side Panels */
+        .side-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .cam-card {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s;
+        }
+
+        .cam-card:hover {
+            transform: scale(1.02);
+            border-color: var(--accent);
+        }
+
+        .cam-card img {
+            width: 100%;
+            display: block;
+        }
+
+        .cam-label {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 10px;
+            letter-spacing: 1px;
+            font-weight: bold;
+            color: var(--accent);
+            text-transform: uppercase;
+        }
+
+        /* Central BEV */
+        .main-view {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle at center, #1a1b25 0%, #0a0b10 100%);
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            position: relative;
+        }
+
+        .bev-container {
+            width: 850px;
+            height: 850px;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 0 80px rgba(0, 255, 170, 0.15),
+                0 0 40px rgba(0, 200, 255, 0.1),
+                inset 0 0 30px rgba(0, 0, 0, 0.3);
+            border: 3px solid rgba(0, 255, 170, 0.2);
+            position: relative;
+        }
+
+        .bev-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .header {
+            position: absolute;
+            top: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-family: 'Orbitron', sans-serif;
+            margin: 0;
+            font-size: 24px;
+            letter-spacing: 4px;
+            color: white;
+        }
+
+        .status-badge {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 4px 15px;
+            border-radius: 20px;
+            background: rgba(0, 255, 170, 0.1);
+            color: var(--accent);
+            font-size: 12px;
+            font-weight: 600;
+            border: 1px solid var(--accent);
+        }
+
+        /* Stats & Telemetry */
+        .telemetry {
+            position: absolute;
+            bottom: 30px;
+            width: 80%;
+            display: flex;
+            justify-content: space-around;
+            background: var(--glass);
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(20px);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            display: block;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 20px;
+            color: var(--accent);
+        }
+
+        .stat-label {
+            font-size: 10px;
+            color: #888;
+            margin-top: 5px;
+        }
+
+        .vignette {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background: radial-gradient(circle, transparent 40%, rgba(0, 0, 0, 0.8) 100%);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="dashboard">
+        <!-- Left Column -->
+        <div class="side-panel">
+            <div class="cam-card">
+                <div class="cam-label">Front Left</div>
+                <img id="img-fl" src="about:blank" alt="FL">
+            </div>
+            <div class="cam-card">
+                <div class="cam-label">Rear Left</div>
+                <img id="img-rl" src="about:blank" alt="RL">
+            </div>
+            <div class="cam-card">
+                <div class="cam-label">Rear</div>
+                <img id="img-r" src="about:blank" alt="R">
+            </div>
+        </div>
+
+        <!-- Center Column -->
+        <div class="main-view">
+            <div class="header">
+                <h1>SURROUND CORE V2</h1>
+                <div class="status-badge">● SYSTEM ACTIVE</div>
+            </div>
+
+            <div class="bev-container">
+                <img id="img-bev" src="/video/bev" alt="BEV">
+            </div>
+
+            <div class="vignette"></div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="side-panel">
+            <div class="cam-card">
+                <div class="cam-label">Front</div>
+                <img id="img-f" src="/video/front" alt="F">
+            </div>
+            <div class="cam-card">
+                <div class="cam-label">Front Right</div>
+                <img id="img-fr" src="about:blank" alt="FR">
+            </div>
+            <div class="cam-card">
+                <div class="cam-label">Rear Right</div>
+                <img id="img-rr" src="about:blank" alt="RR">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Workaround for browser concurrent connection limit (stream critical views, snapshot others).
+
+        const snapshots = [
+            { id: 'img-fl', cam: 'front_left' },
+            { id: 'img-rl', cam: 'rear_left' },
+            { id: 'img-r', cam: 'rear' },
+            { id: 'img-fr', cam: 'front_right' },
+            { id: 'img-rr', cam: 'rear_right' }
+        ];
+
+        function updateSnapshots() {
+            const timestamp = Date.now();
+            snapshots.forEach(item => {
+                const img = document.getElementById(item.id);
+                // Preload to avoid flicker
+                const loader = new Image();
+                loader.onload = () => {
+                    img.src = loader.src;
+                };
+                loader.src = `/snapshot/${item.cam}?t=${timestamp}`;
+            });
+        }
+
+        // Update side views every 500ms (2 FPS)
+        setInterval(updateSnapshots, 500);
+    </script>
+</body>
+
+</html>

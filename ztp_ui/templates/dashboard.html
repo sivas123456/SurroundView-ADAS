@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZTP NOC Dashboard</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-glow"></div>
+                <h2>ZTP Core</h2>
+            </div>
+            <nav class="nav">
+                <button class="nav-item active">Dashboard</button>
+                <button class="nav-item">Devices</button>
+                <button class="nav-item">Logs</button>
+                <button class="nav-item">Settings</button>
+            </nav>
+        </aside>
+
+        <div class="main">
+            <header class="header">
+                <h1>Zero Touch Provisioning System</h1>
+                <div class="live-pill">
+                    <span class="pulse-dot"></span>
+                    Live
+                </div>
+            </header>
+
+            <section class="grid">
+                <article class="card span-2" id="devicePanel"></article>
+                <article class="card" id="mlPanel"></article>
+                <article class="card" id="statusPanel"></article>
+                <article class="card span-2" id="logsPanel"></article>
+                <article class="card span-2" id="controlsPanel"></article>
+            </section>
+        </div>
+    </div>
+
+    <script type="module" src="/static/main.js"></script>
+</body>
+</html>
