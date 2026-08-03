@@ -82,7 +82,7 @@ SurroundView-ADAS/
 ### Dataset Preparation
 
 To test the application, you will need the `.db3` ROS bag datasets, which are hosted externally due to their large size.
-1. Download the required `.db3` ROS bag files from this [Google Drive Link](https://drive.google.com/drive/u/1/folders/134i_1ITzETs3Ime3BUQ9yP9zn21O06Gj).
+1. Download the required `.db3` ROS bag files from the official Hugging Face Dataset: [sivasanthoshp/SurroundView-ADAS-Data](https://huggingface.co/datasets/sivasanthoshp/SurroundView-ADAS-Data).
 2. Place the downloaded `.db3` files directly into the root directory of this project (`SurroundView-ADAS/`).
 
 ## Dependencies
